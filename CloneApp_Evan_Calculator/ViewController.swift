@@ -9,20 +9,21 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let label = UILabel()
     var buttons: [CalculatorButton] = []
-    
     var stacks: [UIStackView] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.appendButtons()
         self.addButtonToView()
+        self.addLabelToView()
     }
 }
 
 extension ViewController {
+   
     private func appendButtons() {
-        
         for _ in 0..<5 {
             stacks.append(UIStackView(arrangedSubviews: []))
         }
@@ -55,7 +56,6 @@ extension ViewController {
     }
     
     private func addButtonToView() {
-        
         let margins = view.layoutMarginsGuide
         
         for i in stacks.indices {
@@ -72,6 +72,20 @@ extension ViewController {
                 stacks[i].bottomAnchor.constraint(equalTo: stacks[i-1].topAnchor, constant: -16).isActive = true
             }
         }
+    }
+    
+    private func addLabelToView() {
+        self.label.textColor = .white
+        self.label.font = .systemFont(ofSize: 92, weight: .light)
+        self.label.text = "0"
+        self.label.textAlignment = .right
+        view.addSubview(self.label)
+        
+        let margins = view.layoutMarginsGuide
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: stacks.last!.topAnchor, constant: -16).isActive = true
     }
 }
 

@@ -79,34 +79,42 @@ class CalculatorButton: UIButton {
     
     private func setup() {
         
-//        self.backgroundColor = .gray
-//        self.layer.cornerRadius = 20
         var config = UIButton.Configuration.filled()
         config.cornerStyle = .capsule
         config.baseBackgroundColor = .darkGray
         
         switch calculatorType {
+        
         case .operand(let type):
             if case let .number(value) = type {
                 self.setTitle(String(value), for: .normal)
+                config.baseBackgroundColor = .darkGray
             } else {
                 self.setTitle(".", for: .normal)
             }
+            
         case .basicOperator(let type):
             self.setImage(UIImage(systemName: type.systemName), for: .normal)
+            config.baseBackgroundColor = .systemOrange
+            
         case .sub(let type):
             if case .clear = type {
                 self.setTitle("AC", for: .normal)
             } else {
                 self.setImage(UIImage(systemName: type.systemName), for: .normal)
             }
+            config.baseBackgroundColor = .lightGray
+            
         }
+        
         self.configuration = config
         translatesAutoresizingMaskIntoConstraints = false
+        
         if case .operand(.number(0)) = calculatorType {
         } else {
             self.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1).isActive = true
         }
+        
     }
 }
 
