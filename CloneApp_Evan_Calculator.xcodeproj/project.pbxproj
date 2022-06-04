@@ -10,9 +10,9 @@
 		210774542849C86C006950EC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210774532849C86C006950EC /* AppDelegate.swift */; };
 		210774562849C86C006950EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210774552849C86C006950EC /* SceneDelegate.swift */; };
 		210774582849C86C006950EC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 210774572849C86C006950EC /* ViewController.swift */; };
-		2107745B2849C86C006950EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 210774592849C86C006950EC /* Main.storyboard */; };
 		2107745D2849C86D006950EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2107745C2849C86D006950EC /* Assets.xcassets */; };
 		210774602849C86D006950EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2107745E2849C86D006950EC /* LaunchScreen.storyboard */; };
+		21E731F5284B15E6000AC6BD /* CalculatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21E731F4284B15E6000AC6BD /* CalculatorButton.swift */; };
 		21F355E42849CB09004E5CDC /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 21F355E32849CB09004E5CDC /* .gitignore */; };
 /* End PBXBuildFile section */
 
@@ -21,10 +21,10 @@
 		210774532849C86C006950EC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		210774552849C86C006950EC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		210774572849C86C006950EC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2107745A2849C86C006950EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2107745C2849C86D006950EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2107745F2849C86D006950EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		210774612849C86D006950EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21E731F4284B15E6000AC6BD /* CalculatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorButton.swift; sourceTree = "<group>"; };
 		21F355E32849CB09004E5CDC /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,7 +62,7 @@
 				210774532849C86C006950EC /* AppDelegate.swift */,
 				210774552849C86C006950EC /* SceneDelegate.swift */,
 				210774572849C86C006950EC /* ViewController.swift */,
-				210774592849C86C006950EC /* Main.storyboard */,
+				21E731F4284B15E6000AC6BD /* CalculatorButton.swift */,
 				2107745C2849C86D006950EC /* Assets.xcassets */,
 				2107745E2849C86D006950EC /* LaunchScreen.storyboard */,
 				210774612849C86D006950EC /* Info.plist */,
@@ -131,7 +131,6 @@
 				21F355E42849CB09004E5CDC /* .gitignore in Resources */,
 				210774602849C86D006950EC /* LaunchScreen.storyboard in Resources */,
 				2107745D2849C86D006950EC /* Assets.xcassets in Resources */,
-				2107745B2849C86C006950EC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,20 +144,13 @@
 				210774582849C86C006950EC /* ViewController.swift in Sources */,
 				210774542849C86C006950EC /* AppDelegate.swift in Sources */,
 				210774562849C86C006950EC /* SceneDelegate.swift in Sources */,
+				21E731F5284B15E6000AC6BD /* CalculatorButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		210774592849C86C006950EC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2107745A2849C86C006950EC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2107745E2849C86D006950EC /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -296,7 +288,6 @@
 				INFOPLIST_FILE = CloneApp_Evan_Calculator/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -324,7 +315,6 @@
 				INFOPLIST_FILE = CloneApp_Evan_Calculator/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
