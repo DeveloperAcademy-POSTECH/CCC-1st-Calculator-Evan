@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     
     var buttons: [CalculatorButton] = []
     
-    let stacks: [UIStackView] = Array(repeating: UIStackView(arrangedSubviews: []), count: 5)
+    var stacks: [UIStackView] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,10 @@ class ViewController: UIViewController {
 
 extension ViewController {
     private func appendButtons() {
+        
+        for _ in 0..<5 {
+            stacks.append(UIStackView(arrangedSubviews: []))
+        }
         
         for i in 0...9 {
             let button = CalculatorButton(type: .operand(type: .number(value: i)))
@@ -36,13 +40,13 @@ extension ViewController {
         let dotButton = CalculatorButton(type: .operand(type: .dot))
         buttons.append(dotButton)
         stacks[0].addArrangedSubview(dotButton)
-        
+
         for subType in SubType.allCases {
             let button = CalculatorButton(type: .sub(type: subType))
             buttons.append(button)
             stacks[4].addArrangedSubview(button)
         }
-        
+
         for (index, operatorType) in zip(0...4, OperatorType.allCases) {
             let button = CalculatorButton(type: .basicOperator(type: operatorType))
             buttons.append(button)
@@ -55,9 +59,7 @@ extension ViewController {
         let margins = view.layoutMarginsGuide
         
         for i in stacks.indices {
-            
             self.view.addSubview(stacks[i])
-            
             stacks[i].spacing = 16
             stacks[i].axis = .horizontal
             stacks[i].translatesAutoresizingMaskIntoConstraints = false
@@ -67,7 +69,7 @@ extension ViewController {
             if i == 0 {
                 stacks[i].bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -40).isActive = true
             } else {
-                stacks[i].bottomAnchor.constraint(equalTo: stacks[i-1].topAnchor, constant: 16).isActive = true
+                stacks[i].bottomAnchor.constraint(equalTo: stacks[i-1].topAnchor, constant: -16).isActive = true
             }
         }
     }
