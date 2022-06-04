@@ -19,10 +19,10 @@ enum OperandType {
 }
 
 enum OperatorType: CaseIterable {
-    case plus
-    case minus
     case divide
     case multiply
+    case minus
+    case plus
     case equal
     
     var systemName: String {
@@ -78,6 +78,10 @@ class CalculatorButton: UIButton {
     }
     
     private func setup() {
+        
+        self.backgroundColor = .gray
+        self.layer.cornerRadius = 20
+        
         switch calculatorType {
         case .operand(let type):
             if case let .number(value) = type {
@@ -93,6 +97,13 @@ class CalculatorButton: UIButton {
             } else {
                 self.setImage(UIImage(systemName: type.systemName), for: .normal)
             }
+        }
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        if case .operand(.number(0)) = calculatorType {
+            self.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 2).isActive = true
+        } else {
+            self.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1).isActive = true
         }
     }
 }
