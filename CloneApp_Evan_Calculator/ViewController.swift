@@ -13,6 +13,13 @@ class ViewController: UIViewController {
     var buttons: [CalculatorButton] = []
     var stacks: [UIStackView] = []
     
+    var expression = ""
+    var nowOperand: String = "0" {
+        didSet {
+            self.label.text = nowOperand
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.appendButtons()
@@ -30,6 +37,7 @@ extension ViewController {
         
         for i in 0...9 {
             let button = CalculatorButton(type: .operand(type: .number(value: i)))
+            button.addTarget(self, action: #selector(tapNum(_:)), for: .touchUpInside)
             buttons.append(button)
             if i == 0 {
                 stacks[0].addArrangedSubview(button)
@@ -39,11 +47,20 @@ extension ViewController {
         }
         
         let dotButton = CalculatorButton(type: .operand(type: .dot))
+        dotButton.addTarget(self, action: #selector(tapDot(_:)), for: .touchUpInside)
         buttons.append(dotButton)
         stacks[0].addArrangedSubview(dotButton)
 
         for subType in SubType.allCases {
             let button = CalculatorButton(type: .sub(type: subType))
+            switch subType {
+            case .changeSign:
+                button.addTarget(self, action: #selector(tapChangeSign(_:)), for: .touchUpInside)
+            case .percent:
+                button.addTarget(self, action: #selector(tapPercent(_:)), for: .touchUpInside)
+            case .clear:
+                button.addTarget(self, action: #selector(tapClear(_:)), for: .touchUpInside)
+            }
             buttons.append(button)
             stacks[4].addArrangedSubview(button)
         }
@@ -86,6 +103,40 @@ extension ViewController {
         label.trailingAnchor.constraint(equalTo: margins.trailingAnchor).isActive = true
         label.leadingAnchor.constraint(equalTo: margins.leadingAnchor).isActive = true
         label.bottomAnchor.constraint(equalTo: stacks.last!.topAnchor, constant: -16).isActive = true
+    }
+}
+
+extension ViewController {
+    @objc private func tapNum(_ sender: UIButton) {
+        guard let value = sender.titleLabel?.text else { return }
+        if nowOperand == "0" {
+            nowOperand = value
+        } else {
+            nowOperand += value
+        }
+    }
+    
+    @objc private func tapDot(_ sender: UIButton) {
+        guard nowOperand.firstIndex(of: ".") == nil else { return }
+        nowOperand += "."
+    }
+    
+    @objc private func tapChangeSign(_ sender: UIButton) {
+        guard let value = nowOperand.first else { return }
+        if String(value) == "-" {
+            nowOperand.remove(at: nowOperand.startIndex)
+        } else {
+            nowOperand = "-" + nowOperand
+        }
+    }
+    
+    @objc private func tapPercent(_ sender: UIButton) {
+        guard let value = Double(nowOperand) else { return }
+        nowOperand = String(value * 0.01)
+    }
+    
+    @objc private func tapClear(_ sender: UIButton) {
+        nowOperand = "0"
     }
 }
 
