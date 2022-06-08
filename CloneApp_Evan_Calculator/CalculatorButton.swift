@@ -88,20 +88,24 @@ class CalculatorButton: UIButton {
         case .operand(let type):
             if case let .number(value) = type {
                 self.setTitle(String(value), for: .normal)
+                self.setFontSize()
                 config.baseBackgroundColor = .darkGray
             } else {
                 self.setTitle(".", for: .normal)
             }
             
         case .basicOperator(let type):
-            self.setImage(UIImage(systemName: type.systemName), for: .normal)
+            let buttonConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
+            self.setImage(UIImage(systemName: type.systemName, withConfiguration: buttonConfig), for: .normal)
             config.baseBackgroundColor = .systemOrange
             
         case .sub(let type):
             if case .clear = type {
                 self.setTitle("AC", for: .normal)
+                self.setFontSize()
             } else {
-                self.setImage(UIImage(systemName: type.systemName), for: .normal)
+                let buttonConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)
+                self.setImage(UIImage(systemName: type.systemName, withConfiguration: buttonConfig), for: .normal)
             }
             config.baseBackgroundColor = .lightGray
             
@@ -115,6 +119,12 @@ class CalculatorButton: UIButton {
             self.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 1).isActive = true
         }
         
+    }
+    
+    private func setFontSize() {
+        let attribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 36)]
+        let attributedTitle = NSAttributedString(string: self.titleLabel?.text ?? "", attributes: attribute)
+        self.setAttributedTitle(attributedTitle, for: .normal)
     }
 }
 
