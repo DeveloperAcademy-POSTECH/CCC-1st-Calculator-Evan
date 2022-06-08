@@ -20,6 +20,8 @@ class ViewController: UIViewController {
         }
     }
     
+    private var operatorTrigger = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.appendButtons()
@@ -67,6 +69,7 @@ extension ViewController {
 
         for (index, operatorType) in zip(0...4, OperatorType.allCases) {
             let button = CalculatorButton(type: .basicOperator(type: operatorType))
+            button.addTarget(self, action: #selector(tapOperator(_:)), for: .touchUpInside)
             buttons.append(button)
             stacks[4-index].addArrangedSubview(button)
         }
@@ -109,8 +112,9 @@ extension ViewController {
 extension ViewController {
     @objc private func tapNum(_ sender: UIButton) {
         guard let value = sender.titleLabel?.text else { return }
-        if nowOperand == "0" {
+        if nowOperand == "0" || operatorTrigger {
             nowOperand = value
+            operatorTrigger = false
         } else {
             nowOperand += value
         }
@@ -137,6 +141,36 @@ extension ViewController {
     
     @objc private func tapClear(_ sender: UIButton) {
         nowOperand = "0"
+    }
+    
+    @objc private func tapOperator(_ sender: UIButton) {
+        guard let button = sender as? CalculatorButton else { return }
+        let value = button.calculatorType
+        
+        if case .basicOperator(let type) = value {
+            switch type {
+            case .divide:
+                tapBasicOperator(type: "/")
+            case .multiply:
+                tapBasicOperator(type: "*")
+            case .minus:
+                tapBasicOperator(type: "-")
+            case .plus:
+                tapBasicOperator(type: "+")
+            case .equal:
+                self.expression += self.nowOperand
+                let expr = NSExpression(format: expression)
+                if let result = expr.expressionValue(with: nil, context: nil) as? Double {
+                    self.nowOperand = String(result)
+                    self.expression = ""
+                }
+            }
+        }
+    }
+    
+    private func tapBasicOperator(type: String) {
+        operatorTrigger = true
+        self.expression += self.nowOperand + type
     }
 }
 
